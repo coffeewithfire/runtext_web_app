@@ -1,14 +1,14 @@
 import cv2
 import numpy as np
 
-def create_video(msg: str) -> None:
+def create_video(message: str) -> None:
 
     width, height = 100, 100    #window dimensions
     fps = 24    #frames per second
     time = 3    #video duration in sec
 
     #video parameters
-    out = cv2.VideoWriter("runtext/utils/video/video.mp4", cv2.VideoWriter_fourcc(*'mp4v'), fps, (width, height))
+    out = cv2.VideoWriter(f"runtext/utils/video/{message}.mp4", cv2.VideoWriter_fourcc(*'mp4v'), fps, (width, height))
 
     #black background frame
     frame = np.zeros((height, width, 3), dtype=np.uint8)
@@ -28,10 +28,10 @@ def create_video(msg: str) -> None:
         frame.fill(0)
 
         #set new x coordinates
-        x -= len(msg) // 2
+        x -= len(message) // 2
 
         #add text to the frame
-        cv2.putText(frame, msg, (x, y), font, font_scale, font_color, font_thickness)
+        cv2.putText(frame, message, (x, y), font, font_scale, font_color, font_thickness)
 
         #record frame
         out.write(frame)
